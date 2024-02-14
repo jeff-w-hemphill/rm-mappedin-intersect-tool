@@ -1,26 +1,58 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import logo from './logo.svg'
+// import './App.css'
+import { getBeacons } from './models/API'
+import { RMBuildingAdapter } from './models/BuildingAdapters'
+import useVenue from './hooks/useVenue'
+import { TGetVenueOptions } from '@mappedin/mappedin-js'
+const RM_SAMPLE_ORG_ID = '3b54ce47-2ff6-4e00-87c6-04885bea4d8c' // Property1 in Dev
 
 function App() {
+  const [beacons, setBeacons] = useState<any[]>([])
+  const [floors, setFloors] = useState<any>({}) // Initialize with an empty set
+  const [options, setOptions] = useState<TGetVenueOptions>({
+    venue: 'mappedin-demo-mall',
+    clientId: '5eab30aa91b055001a68e996',
+    clientSecret: 'RJyRXKcryCMy4erZqqCbuB1NbR66QTGNXVE0x3Pg6oCIlUR1',
+  })
+
+  const venue = useVenue(options)
+
+  let rmBuilding = new RMBuildingAdapter(RM_SAMPLE_ORG_ID, beacons)
+
+  useEffect(() => {
+    getBeacons(RM_SAMPLE_ORG_ID)
+      .then(fetchedBeacons => {
+        setBeacons(fetchedBeacons) // Set beacons state with fetched array
+      })
+      .catch(error => {
+        console.error('Error fetching beacons:', error)
+      })
+  }, [])
+
+  useEffect(() => {
+    console.log({ venue })
+  }, [venue])
+
+  useEffect(() => {
+    rmBuilding = new RMBuildingAdapter(RM_SAMPLE_ORG_ID, beacons)
+
+    Object.entries(rmBuilding.sourceBuilding.floors).forEach(([k, v]: [string, any]) => console.log(v[0].name))
+  }, [beacons])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {Object.entries(rmBuilding.sourceBuilding.floors).map(([k, v]: [string, any]) => (
+        <ul key={k}>
+          <h1>{k}</h1>
+
+          {v.map((r: any) => (
+            <li>{r.name}</li>
+          ))}
+        </ul>
+      ))}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
