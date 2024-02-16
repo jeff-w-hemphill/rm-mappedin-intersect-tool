@@ -4,6 +4,7 @@ import { RMBuilding, Floors, Room } from './interfaces/RMBuilding'
 
 export class RMBuildingAdapter implements BuildingAdapter<RMBuilding> {
   sourceBuilding: RMBuilding
+
   constructor(orgId: string, beacons: any[]) {
     let floors: Floors = {}
 
@@ -18,6 +19,7 @@ export class RMBuildingAdapter implements BuildingAdapter<RMBuilding> {
     }
     this.sourceBuilding = { orgId: orgId, floors: floors }
   }
+
   toBuilding(): Building {
     const levels: Levels = this.sourceBuilding.floors
 

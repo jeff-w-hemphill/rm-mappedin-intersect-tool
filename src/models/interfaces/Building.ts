@@ -6,7 +6,7 @@ export interface Building {
 
 export type Levels = {
   [name: string]: {
-    elevationsIdx?: number | null
+    elevationsIdx?: number
     rooms: Room[]
   }
 }
