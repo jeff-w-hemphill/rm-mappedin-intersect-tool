@@ -18,9 +18,10 @@ function App() {
   })
 
   const venue = useVenue(options)
+  console.log(venue)
 
   let rmBuilding = new RMBuildingAdapter(RM_SAMPLE_ORG_ID, beacons)
-  let miBuilding = new MIBuildingAdapter(venue)
+  let miBuilding = venue ? new MIBuildingAdapter(venue) : null
 
   useEffect(() => {
     getBeacons(RM_SAMPLE_ORG_ID)
@@ -34,8 +35,8 @@ function App() {
 
   useEffect(() => {
     // console.log({ venue })
-    console.log('mi source:', miBuilding.sourceBuilding)
-    console.log('mi -> building: ', miBuilding.toBuilding())
+    miBuilding && console.log('mi source:', miBuilding.sourceBuilding)
+    miBuilding && console.log('mi -> building: ', miBuilding.toBuilding())
   }, [venue])
 
   useEffect(() => {
