@@ -1,16 +1,16 @@
 export interface Building {
-  id: string
+  sourceId: string
   name: string
   levels: Levels
 }
 
-type Levels = {
+export type Levels = {
   [name: string]: {
-    elevationsIdx?: number
+    elevationsIdx?: number | null
     rooms: Room[]
   }
 }
 
-type Room = {
+export type Room = {
   name: string
 }

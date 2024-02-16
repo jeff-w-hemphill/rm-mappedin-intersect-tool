@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react'
 import logo from './logo.svg'
 // import './App.css'
 import { getBeacons } from './models/API'
-import { RMBuildingAdapter } from './models/BuildingAdapters'
+import { RMBuildingAdapter } from './models/RMBuildingAdapter'
 import useVenue from './hooks/useVenue'
 import { TGetVenueOptions } from '@mappedin/mappedin-js'
+import { MIBuildingAdapter } from './models/MIBuildingAdapter'
 const RM_SAMPLE_ORG_ID = '3b54ce47-2ff6-4e00-87c6-04885bea4d8c' // Property1 in Dev
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
   const venue = useVenue(options)
 
   let rmBuilding = new RMBuildingAdapter(RM_SAMPLE_ORG_ID, beacons)
+  let miBuilding = new MIBuildingAdapter(venue)
 
   useEffect(() => {
     getBeacons(RM_SAMPLE_ORG_ID)
@@ -31,13 +33,16 @@ function App() {
   }, [])
 
   useEffect(() => {
-    console.log({ venue })
+    // console.log({ venue })
+    console.log('mi source:', miBuilding.sourceBuilding)
+    console.log('mi -> building: ', miBuilding.toBuilding())
   }, [venue])
 
   useEffect(() => {
     rmBuilding = new RMBuildingAdapter(RM_SAMPLE_ORG_ID, beacons)
+    console.log('rm -> building: ', rmBuilding.toBuilding())
 
-    Object.entries(rmBuilding.sourceBuilding.floors).forEach(([k, v]: [string, any]) => console.log(v[0].name))
+    // Object.entries(rmBuilding.sourceBuilding.floors).forEach(([k, v]: [string, any]) => console.log(v[0].name))
   }, [beacons])
 
   return (
@@ -46,7 +51,7 @@ function App() {
         <ul key={k}>
           <h1>{k}</h1>
 
-          {v.map((r: any) => (
+          {v.rooms.map((r: any) => (
             <li>{r.name}</li>
           ))}
         </ul>

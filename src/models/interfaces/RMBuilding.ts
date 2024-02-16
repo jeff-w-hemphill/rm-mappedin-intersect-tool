@@ -1,12 +1,14 @@
-interface RMBuilding {
+export interface RMBuilding {
   orgId: string
-  floors: {
-    [name: string]: {
-      rooms: Room[]
-    }
+  floors: Floors
+}
+
+export type Floors = {
+  [name: string]: {
+    rooms: Room[]
   }
 }
 
-type Room = {
+export type Room = {
   name: string
 }

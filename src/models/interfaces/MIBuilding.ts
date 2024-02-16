@@ -1,9 +1,13 @@
-interface Location {
-  locationId: string
-  name: string
+export interface MIBuilding {
+  venueId: string
+  maps: Map[]
 }
 
-interface MIBuilding {
-  venueId: string
-  maps: Location[]
+export type Map = {
+  name: string
+  locations: Location[]
+}
+export type Location = {
+  locationId: string
+  name: string
 }

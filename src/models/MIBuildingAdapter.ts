@@ -1,19 +1,24 @@
-import { Building } from './interfaces/Building'
+import { Building, Levels } from './interfaces/Building'
 import { BuildingAdapter } from './interfaces/BuildingAdapter'
-
+import { MIBuilding, Map, Location } from './interfaces/MIBuilding'
 export class MIBuildingAdapter implements BuildingAdapter<MIBuilding> {
   sourceBuilding: MIBuilding
-  constructor(private venue: MIBuilding) {
-    this.sourceBuilding
+  constructor(private venue: any) {
+    this.sourceBuilding = {
+      venueId: venue.venue.id,
+      maps: venue.maps,
+    }
   }
 
-  toBuilding(): Building | null {
-    // const levels: Level[] = this.building.levels.map((level) => {
-    //   const rooms: Room[] = level.rooms.map((room) => ({ id: room.roomId }));
-    //   return { id: level.levelId, rooms };
-    // });
-
-    // return { levels };
-    return null
+  toBuilding(): Building {
+    const levels: Levels = {}
+    this.sourceBuilding.maps.forEach(m => {
+      levels[m.name] = { rooms: m.locations.map(l => ({ name: l.name })) }
+    })
+    return {
+      sourceId: this.sourceBuilding.venueId,
+      name: '',
+      levels: levels,
+    }
   }
 }

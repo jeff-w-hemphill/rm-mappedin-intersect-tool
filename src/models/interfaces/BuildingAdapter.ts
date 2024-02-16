@@ -1,6 +1,6 @@
 import { Building } from './Building'
 
-export interface BuildingAdapter<T> {
-  sourceBuilding: T
+export interface BuildingAdapter<Source> {
+  sourceBuilding: Source
   toBuilding: () => Building
 }
