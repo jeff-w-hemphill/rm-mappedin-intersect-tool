@@ -1,6 +1,7 @@
 import { Building, Levels } from './interfaces/Building'
 import { BuildingAdapter } from './interfaces/BuildingAdapter'
 import { MIBuilding, Map, Location } from './interfaces/MIBuilding'
+
 export class MIBuildingAdapter implements BuildingAdapter<MIBuilding> {
   sourceBuilding: MIBuilding
   constructor(private venue: any) {
