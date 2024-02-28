@@ -17,10 +17,10 @@ const CompareForm = (props: Props) => {
           <TextField fullWidth label="React Token" variant="outlined" multiline rows={4} />
         </Grid>
         {/* Second Row */}
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <TextField label="React Org id" variant="outlined" fullWidth />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <TextField label="MappedIn Venue id" variant="outlined" fullWidth />
         </Grid>
       </Grid>

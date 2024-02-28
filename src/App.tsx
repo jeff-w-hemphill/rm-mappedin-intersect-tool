@@ -112,9 +112,13 @@ function App() {
       ))} */}
       <Box display="flex" flexDirection="row">
         <CompareForm />
-        <Box width="50%">
-          {' '}
-          {/* <div id="map" /> */}
+        <Box
+          margin="20px"
+          width="50%"
+          maxHeight={'400px'}
+          overflow="hidden"
+          sx={{ boxSizing: 'border-box', border: '1px solid black' }}
+        >
           <VenueMap />
         </Box>
       </Box>
