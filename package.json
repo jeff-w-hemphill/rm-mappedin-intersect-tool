@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/styled": "^11.11.0",
-    "@mappedin/mappedin-js": "^5.29.3",
+    "@mappedin/mappedin-js": "^6.0.1-alpha.38",
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",

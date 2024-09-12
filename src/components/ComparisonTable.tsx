@@ -52,9 +52,9 @@ function createData(levelRoom: string, inRM: boolean, inMI: boolean): Data {
 
 const rows = [
   createData('1: 101', true, false),
-  createData('1: 101', true, false),
-  createData('1: 101', true, false),
-  createData('1: 101', true, false),
+  createData('1: 102', true, false),
+  createData('2: 201', true, false),
+  createData('2: 202', true, false),
 ]
 
 export default function StickyHeadTable() {
